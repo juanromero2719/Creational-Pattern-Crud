@@ -12,6 +12,20 @@ import Modelo.Estudiante;
  */
 public class FabricaEstudiantes {
     
+    private static FabricaEstudiantes instancia;
+    
+    private FabricaEstudiantes() {
+    }
+    
+    public static FabricaEstudiantes getInstancia() {
+        
+        if (instancia == null) {
+            instancia = new FabricaEstudiantes();
+        }
+        return instancia;
+    }
+
+    
     public Estudiante crearEstudiante(int idEstudiante, String nombreEstudiante, String apellidoEstudiante, String codigo, double promedio){
         return new Estudiante(idEstudiante, nombreEstudiante, apellidoEstudiante, codigo, promedio);
     }

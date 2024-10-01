@@ -20,6 +20,9 @@ public class Ejercicio2 {
          try {
              
             Connection conexion = FabricaConexion.getInstancia().crearConexion();
+            System.out.println("----------");
+            System.out.println("conexion: " + conexion);
+            System.out.println("----------");
             EstudianteGUI estudianteGUI = new EstudianteGUI();
             estudianteGUI.show();
             

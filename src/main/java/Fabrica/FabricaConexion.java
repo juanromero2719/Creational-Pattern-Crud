@@ -20,6 +20,7 @@ public class FabricaConexion {
     
     private static FabricaConexion instancia;
     private IConexion conexion;
+    private Connection connection;
     
     private FabricaConexion(){
     
@@ -35,27 +36,29 @@ public class FabricaConexion {
     
     public Connection crearConexion() throws SQLException, IOException {
         
-        Configuracion config = new Configuracion("config.properties");
-        String tipoBD = config.getPropiedad("db.tipo");
-        String url = config.getPropiedad("db.url");
-        String usuario = config.getPropiedad("db.usuario");
-        String password = config.getPropiedad("db.password");
-                   
-        switch (tipoBD.toLowerCase()) {
-            
-            case "mysql":
-                System.out.println("Intentando conectar a mysql...");
-                conexion = new MySQLConexion(url, usuario, password);
-                break;
-            case "postgresql":
-                System.out.println("Intentando conectar a postgres...");
-                conexion = new PostgreSQLConexion(url, usuario, password);
-                break;
-            default:
-                System.out.println("Tipo de base de datos no soportado: " + tipoBD);
+        if (connection == null || connection.isClosed()) {
+            Configuracion config = new Configuracion("config.properties");
+            String tipoBD = config.getPropiedad("db.tipo");
+            String url = config.getPropiedad("db.url");
+            String usuario = config.getPropiedad("db.usuario");
+            String password = config.getPropiedad("db.password");
+
+            switch (tipoBD.toLowerCase()) {
+                case "mysql":
+                    System.out.println("Intentando conectar a mysql...");
+                    conexion = new MySQLConexion(url, usuario, password);
+                    break;
+                case "postgresql":
+                    System.out.println("Intentando conectar a postgres...");
+                    conexion = new PostgreSQLConexion(url, usuario, password);
+                    break;
+                default:
+                    System.out.println("Tipo de base de datos no soportado: " + tipoBD);
+            }
+
+            connection = conexion.conectar(); 
         }
-        
-             
-        return conexion.conectar();
+
+        return connection;  
     }
 }

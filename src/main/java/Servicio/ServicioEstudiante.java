@@ -23,11 +23,14 @@ public class ServicioEstudiante {
     
     public ServicioEstudiante() throws SQLException, IOException {
         this.estudianteDAO = new EstudianteDAO();
-        this.fabricaEstudiante = new FabricaEstudiantes();
+        this.fabricaEstudiante = FabricaEstudiantes.getInstancia();
     }
     
     public void agregarEstudiante(int idEstudiante, String nombre, String apellido, String codigo, double promedio){
         Estudiante estudiante = fabricaEstudiante.crearEstudiante(idEstudiante, nombre, apellido, codigo, promedio);
+        System.out.println("----------");
+        System.out.println("fabrica Estudiante: " + fabricaEstudiante);
+        System.out.println("----------");
         estudianteDAO.agregar(estudiante);
     }
     
@@ -41,6 +44,9 @@ public class ServicioEstudiante {
     
     public void editarEstudiante(int idEstudiante, String nombre, String apellido, String codigo, double promedio){
         Estudiante estudiante = fabricaEstudiante.crearEstudiante(idEstudiante, nombre, apellido, codigo, promedio);
+        System.out.println("----------");
+        System.out.println("fabrica Estudiante: " + fabricaEstudiante);
+        System.out.println("----------");
         estudianteDAO.editar(estudiante);
     }
     

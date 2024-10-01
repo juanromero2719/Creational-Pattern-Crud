@@ -37,6 +37,9 @@ public class EstudianteDAO implements IGestorDatos<Estudiante>{
             stmt.setString(4, estudiante.getCodigo());
             stmt.setDouble(5, estudiante.getPromedio());
             stmt.executeUpdate();
+            System.out.println("----------");
+            System.out.println("conexion:" + conexion);
+            System.out.println("----------");
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -80,7 +83,12 @@ public class EstudianteDAO implements IGestorDatos<Estudiante>{
                         rs.getDouble("promedio")
                 );
                 estudiantes.add(estudiante);
+                
             }
+            
+            System.out.println("----------");
+            System.out.println("conexion:" + conexion);
+            System.out.println("----------");
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -97,6 +105,9 @@ public class EstudianteDAO implements IGestorDatos<Estudiante>{
             stmt.setDouble(4, estudiante.getPromedio());
             stmt.setInt(5, estudiante.getId());
             stmt.executeUpdate();
+            System.out.println("----------");
+            System.out.println("conexion:" + conexion);
+            System.out.println("----------");
         } catch (SQLException e) {
             e.printStackTrace();
         }
